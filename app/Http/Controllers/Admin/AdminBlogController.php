@@ -48,9 +48,8 @@ class AdminBlogController extends Controller
     }
 
     // 指定したIDのブログ編集画面
-    public function edit($id)
+    public function edit(Blog $blog)
     {
-        $blog = Blog::findOrFail($id);
         return view('admin.blogs.edit', ['blog' => $blog]);
     }
 

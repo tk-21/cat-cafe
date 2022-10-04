@@ -15,7 +15,7 @@ class AdminBlogController extends Controller
     public function index()
     {
 //        記事をすべて取得
-        $blogs = Blog::latest('updated_at')->limit(10)->get();
+        $blogs = Blog::latest('updated_at')->simplePaginate(10);
         return view('admin.blogs.index', ['blogs' => $blogs]);
     }
 

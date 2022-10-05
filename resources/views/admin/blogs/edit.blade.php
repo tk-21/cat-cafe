@@ -4,9 +4,10 @@
     <section class="py-8">
         <div class="container px-4 mx-auto">
             <div class="py-4 bg-white rounded">
-                <form action="{{ route('admin.blogs.update', ['blog' => $blog->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.blogs.update', ['blog' => $blog->id]) }}" method="POST"
+                      enctype="multipart/form-data">
                     @csrf
-{{--                    更新時はPUTを使う--}}
+                    {{--                    更新時はPUTを使う--}}
                     @method('PUT')
                     <div class="flex px-6 pb-4 border-b">
                         <h3 class="text-xl font-bold">ブログ編集</h3>
@@ -39,7 +40,8 @@
                             <label class="block text-sm font-medium mb-2" for="image">画像</label>
                             <div class="flex items-end">
                                 <img id="previewImage" src="{{ asset('storage/'. $blog->image) }}"
-                                     data-noimage="{{ asset('storage/'. $blog->image) }}" alt="" class="rounded shadow-md w-64">
+                                     data-noimage="{{ asset('storage/'. $blog->image) }}" alt=""
+                                     class="rounded shadow-md w-64">
                                 <input id="image" class="block w-full px-4 py-3 mb-2" type="file" accept='image/*'
                                        name="image">
                             </div>
@@ -57,10 +59,9 @@
                                 <select id="category"
                                         class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
                                         name="">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                    <option>Option 4</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                                 <div
                                     class="pointer-events-none transform -translate-x-full flex items-center px-2 text-gray-500">

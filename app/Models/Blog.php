@@ -15,4 +15,10 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+//    多対多のリレーションをつくる
+    public function cats()
+    {
+        return $this->belongsToMany(Cat::class)->withTimestamps();
+    }
 }

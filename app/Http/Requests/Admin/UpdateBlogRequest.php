@@ -36,6 +36,8 @@ class UpdateBlogRequest extends FormRequest
                 'dimensions:min_width=300,min_height=300,max_width=1200,max_height=1200', // 画像の解像度が300px * 300px ~ 1200px * 1200px
             ],
             'body' => ['required', 'max:20000'],
+//            送信された副数の値に対するバリデーションをするにはパラメータ名の後に.*をつける
+            'cats.*' => ['distinct', 'exists:cats,id']
         ];
     }
 }

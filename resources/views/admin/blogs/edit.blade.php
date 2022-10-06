@@ -61,8 +61,9 @@
                                         name="category_id">
                                     <option value="">選択してください</option>
                                     @foreach($categories as $category)
-{{--                                        選択したカテゴリーが表示されるようにしている--}}
-                                        <option value="{{ $category->id }}" @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
+                                        {{--                                        選択したカテゴリーが表示されるようにしている--}}
+                                        <option value="{{ $category->id }}"
+                                                @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 <div
@@ -78,11 +79,15 @@
 
                         <div class="mb-6">
                             <label class="block text-sm font-medium mb-2">登場するねこ</label>
-                            <select id="js-pulldown" class="mr-6 w-full" name="" multiple>
-                                <option selected>Option 1</option>
-                                <option>Option 2</option>
-                                <option selected>Option 3</option>
-                                <option>Option 4</option>
+                            {{--                            複数選択できるようにname属性に[]をつけ、multiple属性も必要--}}
+                            <select id="js-pulldown" class="mr-6 w-full" name="cats[]" multiple>
+                                <option value="">選択してください</option>
+                                @foreach($cats as $cat)
+                                    {{--                                    in_array関数で配列の中に含まれるかどうかを確認し、該当する場合にselected属性を出力する--}}
+                                    {{--                                old関数の第2引数に指定する値をリレーションを使って取得するが、複数のcatが入ったコレクション型になるのでpluckとallで変換する--}}
+                                    <option value="{{ $cat->id }}"
+                                            @if(in_array($cat->id, old('cats', $blog->cats->pluck('id')->all()))) selected @endif>{{ $cat->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

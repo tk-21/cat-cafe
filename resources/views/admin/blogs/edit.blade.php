@@ -58,9 +58,11 @@
                             <div class="flex">
                                 <select id="category"
                                         class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded"
-                                        name="">
+                                        name="category_id">
+                                    <option value="">選択してください</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+{{--                                        選択したカテゴリーが表示されるようにしている--}}
+                                        <option value="{{ $category->id }}" @if($category->id == old('category_id', $blog->category->id)) selected @endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 <div

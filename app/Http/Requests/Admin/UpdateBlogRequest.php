@@ -24,6 +24,8 @@ class UpdateBlogRequest extends FormRequest
     public function rules()
     {
         return [
+//            送信された値がcategoriesテーブルのidカラムに存在するかどうか検証する
+            'category_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'max:255'],
             'image' => [
                 'nullable', // 省略可

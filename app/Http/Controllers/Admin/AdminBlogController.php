@@ -71,6 +71,8 @@ class AdminBlogController extends Controller
 //            変更後の画像をアップロード、保存パスを更新対象データにセット
             $updateData['image'] = $request->file('image')->store('blogs', 'public');
         }
+//        外部キーをセットして更新
+        $blog->category()->associate($updateData['category_id']);
         $blog->update($updateData);
 
         return to_route('admin.blogs.index')->with('success', 'ブログを更新しました');
